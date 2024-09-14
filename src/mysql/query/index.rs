@@ -79,7 +79,7 @@ impl From<&MySqlRow> for IndexQueryResult {
         use crate::mysql::discovery::GetMySqlValue;
         use crate::sqlx_types::Row;
         Self {
-            non_unique: row.get(0),
+            non_unique: row.get::<String, _>(0).parse::<i32>().unwrap(),
             index_name: row.get_string(1),
             column_name: row.get_string_opt(2),
             collation: row.get_string_opt(3),
